@@ -32,7 +32,7 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the Toronto airline routes GeoJSON URL.
-let torontoData = "https://raw.githubusercontent.com/liviblocker/Mapping_Earthquakes/main/torontoRoutes.json";
+let torontoData = "https://raw.githubusercontent.com/liviblocker/Mapping_Earthquakes/mapping_geojson_linestrings/torontoRoutes.json";
 
 // Grabbing our GeoJSON data.
 d3.json(torontoData).then(function(data) {
@@ -51,9 +51,9 @@ d3.json(torontoData).then(function(data) {
   L.geoJson(data, {
     onEachFeature: function(features, layer) {
       console.log(layer);
-      layer.bindPopup("<h2>" + "Airport Code: " + features.properties.faa + "</h2>" + 
+      layer.bindPopup("<h2>" + "Airline: " + features.properties.airline + "</h2>" + 
       "<hr {display: block; margin-before: auto; margin-after: auto; margin-start: auto; margin-end: auto; border-width: .5px;}>" +
-      "<body>" + "Airport Name: " + features.properties.name + "</body>");
+      "<body>" + "Destination: " + features.properties.dst + "</body>");
     }
   }).addTo(map);
 });
