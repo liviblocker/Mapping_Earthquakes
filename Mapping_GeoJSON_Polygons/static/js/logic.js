@@ -24,39 +24,28 @@ let baseMaps = {
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
   center: [43.7, -79.3],
-  zoom: 2,
-  layers: [satelliteStreets]
+  zoom: 11,
+  layers: [streets]
 })
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the Toronto neighborhoods GeoJSON URL.
-let torontoHoods = "https://raw.githubusercontent.com/liviblocker/Mapping_Earthquakes/mapping_geojson_polygons/torontoNeighborhoods.json";
+let torontoHoods = "https://raw.githubusercontent.com/liviblocker/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
 
 // Grabbing our GeoJSON data.
 d3.json(torontoHoods).then(function(data) {
   console.log(data);
 
 // Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data).addTo(map);
-});
-
-// Create a style for the lines.
-let myStyle = {
-  color: "#ffffa1"
-}
-
-d3.json(torontoData).then(function(data) {
-  console.log(data);
-  // Creating a GeoJSON layer with the retrieved data.
-  L.geoJson(data, {
-    style: myStyle,
-    onEachFeature: function(features, layer) {
-      console.log(layer);
-      layer.bindPopup("<h2>" + "Airline: " + features.properties.airline + "</h2>" + 
-      "<hr {display: block; margin-before: auto; margin-after: auto; margin-start: auto; margin-end: auto; border-width: .5px;}>" +
-      "<body>" + "Destination: " + features.properties.dst + "</body>");
-    }
-  }).addTo(map);
+L.geoJson(data, {
+  fillColor: "#ffffa1",
+  fillOpacity: 0.2,
+  weight: 1,
+  onEachFeature: function(features, layer) {
+    console.log(layer);
+    layer.bindPopup("<h2>" + "Neighborhood: " + features.properties.AREA_NAME + "</h2>");
+  }
+}).addTo(map);
 });
