@@ -40,15 +40,21 @@ d3.json(torontoData).then(function(data) {
 
 // Creating a GeoJSON layer with the retrieved data.
 L.geoJson(data, {
-  color: "yellow",
+  // Create a style for the lines.
+  let myStyle = {
+  color: "#ffffa1",
   weight: 2
-}).addTo(map);
-});
+)}
+}.addTo(map);
+};
+
+
 
 d3.json(torontoData).then(function(data) {
   console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
   L.geoJson(data, {
+    style: myStyle,
     onEachFeature: function(features, layer) {
       console.log(layer);
       layer.bindPopup("<h2>" + "Airline: " + features.properties.airline + "</h2>" + 
