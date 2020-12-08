@@ -48,8 +48,6 @@ L.geoJson(data, {
 }.addTo(map);
 };
 
-
-
 d3.json(torontoData).then(function(data) {
   console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
