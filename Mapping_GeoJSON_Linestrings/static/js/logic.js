@@ -30,33 +30,6 @@ let map = L.map('mapid', {
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
-
-// Accessing the Toronto airline routes GeoJSON URL.
-let torontoData = "https://raw.githubusercontent.com/liviblocker/Mapping_Earthquakes/mapping_geojson_linestrings/torontoRoutes.json";
-
-// Grabbing our GeoJSON data.
-d3.json(torontoData).then(function(data) {
-  console.log(data);
-
-// Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data).addTo(map);
-});
-
-// Create a style for the lines.
-let myStyle = {
-  color: "#ffffa1"
-}
-
-d3.json(torontoData).then(function(data) {
-  console.log(data);
-  // Creating a GeoJSON layer with the retrieved data.
-  L.geoJson(data, {
-    style: myStyle,
-    onEachFeature: function(features, layer) {
-      console.log(layer);
-      layer.bindPopup("<h2>" + "Airline: " + features.properties.airline + "</h2>" + 
-      "<hr {display: block; margin-before: auto; margin-after: auto; margin-start: auto; margin-end: auto; border-width: .5px;}>" +
-      "<body>" + "Destination: " + features.properties.dst + "</body>");
     }
   }).addTo(map);
 });
